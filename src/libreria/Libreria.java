@@ -1,43 +1,38 @@
 package libreria;
 
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 import libreria.entidades.Autor;
 import libreria.entidades.Editorial;
+import libreria.entidades.Prestamo;
 import libreria.entidades.Libro;
+import libreria.entidades.Cliente;
 import libreria.servicios.AutorServicios;
+import libreria.servicios.ClienteServicios;
+import libreria.servicios.EditorialServicios;
 import libreria.servicios.LibroServicios;
+import java.util.List;
+import libreria.servicios.PrestamoServicios;
 
 public class Libreria {
-
-    public static void main(String[] args) {
+    
+    public static void main(String[] args) throws Exception {
         LibroServicios libroServicios = new LibroServicios();
         AutorServicios autorServicios = new AutorServicios();
-
-        Autor a = new Autor(null,"Borge", Boolean.FALSE);
-        Editorial e = new Editorial(null, "Ediction IV", Boolean.FALSE);
+        EditorialServicios editorialServicios = new EditorialServicios();
+        Scanner leer = new Scanner(System.in);
+        ClienteServicios clienteServicios = new ClienteServicios();
+        PrestamoServicios prestamoServicios = new PrestamoServicios();
         
-        Libro libro = new Libro("20","Platero y yo","1720",15,0,15, Boolean.TRUE, a, e);
-
-        libroServicios.guardar(libro);
-//        List<Autor> autores = autorServicios.BuscarAutor("ce");
-//
-//        for (Autor a : autores) {
-//            System.out.println(a);
-//        }
-//        Libro libro = libroServicios.BuscarLibroISBN("13");
-//        System.out.println(libro);
-//        List<Libro> libros = libroServicios.BuscarPorTitulo("ha");
-//        for (Libro libro : libros) {
-//            System.out.println(libro);
-//        }
-//        List<Libro> libros = libroServicios.BuscarPorAutor("e");
-//        for (Libro libro : libros) {
-//            System.out.println(libro);
-//        }
-//        List<Libro> libros = libroServicios.BuscarPorEditorial("zaBALA");
-//        for (Libro libro : libros) {
-//            System.out.println(libro);
-//        }
+//       Faltaría crear el menu
+        
     }
-
+    
+    private static Date convertirStringADate(String fecha) throws ParseException {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        return formato.parse(fecha);
+    }
+    
 }

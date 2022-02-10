@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/usuario/Documents/Ejercicios%20Java/libreria/src/libreria/persistencias/EditorialDAO.java</file>
-            <file>file:/C:/Users/usuario/Documents/Ejercicios%20Java/libreria/src/libreria/servicios/EditorialServicios.java</file>
-            <file>file:/C:/Users/usuario/Documents/Ejercicios%20Java/libreria/src/libreria/servicios/AutorServicios.java</file>
-            <file>file:/C:/Users/usuario/Documents/Ejercicios%20Java/libreria/src/libreria/persistencias/DAO.java</file>
-            <file>file:/C:/Users/usuario/Documents/Ejercicios%20Java/libreria/src/libreria/entidades/Libro.java</file>
-            <file>file:/C:/Users/usuario/Documents/Ejercicios%20Java/libreria/src/libreria/entidades/Editorial.java</file>
+            <file>file:/C:/Users/usuario/Documents/Ejercicios%20Java/libreria/src/libreria/Libreria.java</file>
+            <file>file:/C:/Users/usuario/Documents/Ejercicios%20Java/libreria/src/libreria/servicios/PrestamoServicios.java</file>
+            <file>file:/C:/Users/usuario/Documents/Ejercicios%20Java/libreria/src/libreria/servicios/ClienteServicios.java</file>
+            <file>file:/C:/Users/usuario/Documents/Ejercicios%20Java/libreria/src/libreria/persistencias/PrestamoDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,5 +1,6 @@
 package libreria.servicios;
 
+import java.util.List;
 import libreria.entidades.Editorial;
 import libreria.persistencias.EditorialDAO;
 
@@ -44,6 +45,24 @@ public class EditorialServicios {
             System.out.println("Se elimino correctamente el id " + id);
         } catch (Exception e) {
             System.out.println("No se encontro el id");
+        }
+    }
+    
+    public List<Editorial> MostrarTodo(){
+        try {
+            return dao.MostrarTodaLaEditorial();
+        } catch (Exception e) {
+            System.out.println("No existen editoriales para mostrar");
+            return null;
+        }
+    }
+    
+    public Editorial BuscarEditorialPorId(Integer id){
+        try {
+            return dao.BuscarEditorial(id);
+        } catch (Exception e) {
+            System.out.println("No se encontro el id");
+            return null;
         }
     }
 }

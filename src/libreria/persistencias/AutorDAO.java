@@ -29,9 +29,20 @@ public class AutorDAO extends DAO {
         desconectar();
     }
 
+    public List<Autor> mostrarTodoLosLibros() {
+        conectar();
+        List<Autor> autores = em.createQuery("SELECT a FROM Autor a").getResultList();
+        desconectar();
+        return autores;
+    }
+
     public Autor BuscarAutor(Integer id) {
-        return (Autor) em.createQuery("SELECT a FROM Autor a WHERE a.id = :id").setParameter("id", id)
+        conectar();
+        Autor autor = (Autor) em.createQuery("SELECT a FROM Autor a WHERE a.id = :id").setParameter("id", id)
                 .getSingleResult();
+        desconectar();
+
+        return autor;
     }
 
     public List<Autor> BuscarPorNombre(String nombre) {
@@ -42,5 +53,5 @@ public class AutorDAO extends DAO {
         desconectar();
         return autores;
     }
-    
+
 }

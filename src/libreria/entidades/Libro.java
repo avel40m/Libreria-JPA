@@ -30,9 +30,9 @@ public class Libro implements Serializable {
     private Integer ejemplaresPrestados;
     private Integer ejemplaresRestantes;
     private Boolean alta;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private Autor autor;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private Editorial editorial;
 
     public Libro() {
@@ -124,7 +124,8 @@ public class Libro implements Serializable {
 
     @Override
     public String toString() {
-        return "Libro: " + "isbn = " + isbn + ", titulo = " + titulo + ", año = " + anio + " , nombre del autor = " + autor.getNombre() + " y nombre de la editorial = " + editorial.getNombre() + '.';
+        return "Libro{" + "isbn=" + isbn + ", titulo=" + titulo + ", anio=" + anio + ", ejemplares=" + ejemplares + ", ejemplaresPrestados=" + ejemplaresPrestados + ", ejemplaresRestantes=" + ejemplaresRestantes + ", alta=" + alta + ", autor=" + autor + ", editorial=" + editorial + '}';
     }
+    
     
 }

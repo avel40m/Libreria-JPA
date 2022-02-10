@@ -23,12 +23,12 @@ public class LibroServicios {
             System.out.println(e.getMessage());
         }
     }
-    
-    private void validarCampos(Libro libro) throws Exception{
-        if (BuscarLibroISBN(libro.getIsbn()).toString() != null) {
+
+    private void validarCampos(Libro libro) throws Exception {
+        if (TraerLibroPorISBN(libro.getIsbn()).toString() != null) {
             throw new Exception("Error el ISBN " + libro.getIsbn() + " figura en la base de datos");
         }
-        if(libro.getTitulo().isEmpty()){
+        if (libro.getTitulo().isEmpty()) {
             throw new Exception("El campo nombre es obligatorio");
         }
         if (libro.getIsbn().isEmpty()) {
@@ -51,6 +51,14 @@ public class LibroServicios {
         }
     }
 
+    private Libro TraerLibroPorISBN(String isbn) {
+        try {
+            return dao.buscarPorISBN(isbn);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public void editar(Libro libro) {
         try {
             Libro l = dao.buscarPorISBN(libro.getIsbn());
@@ -70,13 +78,13 @@ public class LibroServicios {
         }
     }
 
-    public void eliminar(Libro libro) {
+    public void eliminar(String isbn) {
         try {
-            Libro l = dao.buscarPorISBN(libro.getIsbn());
+            Libro l = dao.buscarPorISBN(isbn);
             dao.eliminar(l);
             System.out.println("Libro eliminado");
         } catch (Exception e) {
-            System.out.println("No se encontro el id del libro");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -113,6 +121,58 @@ public class LibroServicios {
         } catch (Exception e) {
             System.out.println("No se encontro el nombre de la editorial " + nombre + " en nuestra base de datos");
             return null;
+        }
+    }
+
+    public List<Libro> listarTodoLosLibros() {
+        try {
+            return dao.ListarLibros();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    private void editarPrestamosLibro(String isbn) {
+        try {
+            Libro l = BuscarLibroISBN(isbn);
+            l.setEjemplaresPrestados(l.getEjemplaresPrestados() + 1);
+            l.setEjemplaresRestantes(l.getEjemplaresRestantes() - 1);
+            dao.modificar(l);
+        } catch (Exception e) {
+        }
+    }
+
+    public void editarDevolucionLibro(String isbn) throws Exception {
+        Libro l = BuscarLibroISBN(isbn);
+
+        if (l != null) {
+            validacionDelPrestamos(l);
+            l.setEjemplaresPrestados(l.getEjemplaresPrestados() - 1);
+            l.setEjemplaresRestantes(l.getEjemplaresRestantes() + 1);
+            dao.modificar(l);
+        } else {
+            throw new Exception("No se encontro el ISBN");
+        }
+    }
+
+    public void PrestamoLibro(String isbn) throws Exception {
+        Libro libro = BuscarLibroISBN(isbn);
+
+        if (libro != null) {
+            validacionDelPrestamos(libro);
+            editarPrestamosLibro(isbn);
+        } else {
+            throw new Exception("No se encontro el ISBN en la base de datos");
+        }
+    }
+
+    private void validacionDelPrestamos(Libro libro) throws Exception {
+        if (Objects.equals(libro.getEjemplaresPrestados(), libro.getEjemplares())) {
+            throw new Exception("No se puede hacer el prestamos, esperen devoluciones");
+        }
+        if (libro.getEjemplaresRestantes() == 0) {
+            throw new Exception("No se puede hacer el prestamos, esperen devoluciones");
         }
     }
 }

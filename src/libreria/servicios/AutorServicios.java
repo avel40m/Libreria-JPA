@@ -58,4 +58,22 @@ public class AutorServicios {
         }
     }
     
+    public List<Autor> MostrarTodoLosAutores(){
+        try {
+            return dao.mostrarTodoLosLibros();
+        } catch (Exception e) {
+            System.out.println("No existen libros");
+            return null;
+        }
+    }
+    
+    public Autor BuscarAutorPorId(Integer id){
+        try {
+            return dao.BuscarAutor(id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    
 }

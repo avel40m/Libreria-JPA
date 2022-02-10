@@ -24,6 +24,9 @@ public class LibroDAO extends DAO {
     public void eliminar(Libro objeto) {
         conectar();
         em.getTransaction().begin();
+        if (!em.contains(objeto)) {
+            objeto = em.merge(objeto);
+        }
         em.remove(objeto);
         em.getTransaction().commit();
         desconectar();
@@ -39,20 +42,16 @@ public class LibroDAO extends DAO {
     }
 
     public List<Libro> BuscarPorTitulo(String titulo) {
-        conectar();
         List<Libro> libros = em.createQuery("SELECT l FROM Libro l WHERE l.titulo LIKE :titulo")
                 .setParameter("titulo", "%" + titulo + "%")
                 .getResultList();
-        desconectar();
         return libros;
     }
 
     public List<Libro> BuscarPorAutor(String autor) {
-        conectar();
         List<Libro> libros = em.createQuery("SELECT l FROM Libro l WHERE l.autor.nombre LIKE :autor")
                 .setParameter("autor", "%" + autor + "%")
                 .getResultList();
-        desconectar();
         return libros;
     }
 
@@ -64,4 +63,12 @@ public class LibroDAO extends DAO {
         desconectar();
         return libros;
     }
+
+    public List<Libro> ListarLibros() {
+        conectar();
+        List<Libro> libros = em.createQuery("SELECT l FROM Libro l").getResultList();
+        desconectar();
+        return libros;
+    }
+
 }
